@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+void printLps(string str,int start,int end){
+    for(int i=start;i<end;i++){
+        cout<<str[i];
+    }
+}
+void lps(string str){
+    int maxLength=1,start=0;
+    for(int i=0;i<str.size();i++){
+        for(int j=i;j<str.size();j++){
+            int flag=1;
+            for(int k=0;k<(j-1)+1/2;k++){
+                if(str[i+k]!=str[j-k]){
+                    flag=0;
+                }
+            }
+            if(flag==1&&(j-1)+1>maxLength){
+                start=i;
+                maxLength=(j-1)+1;
+            }
+        }
+    }
+    printLps(str,start,start+maxLength);
+}
+int main(){
+    string str;
+    cin>>str;
+    lps(str);
+}
